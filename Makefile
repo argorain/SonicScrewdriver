@@ -36,9 +36,9 @@ LDFLAGS		+= -Wl,--gc-sections
 
 # PROJECT DEFINES
 BINARY = sonic
-SOURCE = main.c
-OBJS = main.o
-HEADERS = 
+SOURCE = main.c drivers/usart.c
+OBJS = main.o drivers/usart.o
+HEADERS = drivers/usart.h
 
 all: $(BINARY).elf
 
@@ -51,6 +51,9 @@ $(BINARY).elf: $(OBJS) $(HEADERS)
 flash:
 	@echo "Flashing into chip..."
 	sudo avrdude -v -patmega328p -carduino -P/dev/ttyUSB0 -b57600 -D -Uflash:w:$(BINARY).hex:i
+
+do:
+	clean all flash
 
 clean:
 	$(RM) *.o *.d *.elf *.bin *.hex *.srec *.list *.map
