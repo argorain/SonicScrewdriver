@@ -57,3 +57,4 @@ do:
 
 clean:
 	$(RM) *.o *.d *.elf *.bin *.hex *.srec *.list *.map
+	$(RM) drivers/*.o
